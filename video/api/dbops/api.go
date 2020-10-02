@@ -126,8 +126,6 @@ func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
 	}
 	stmtIns.Close()
 
-	for rows.
-	res := &defs.VideoInfo{Id: vid, AuthorId: aid, Name: name, DisplayCtime: dct}
 	return res, nil
 }
 }
