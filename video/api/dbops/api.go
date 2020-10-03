@@ -117,17 +117,23 @@ func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
 
 	var res []*defs.Comment
 
-	rows, err = stmtIns.Query(vid, from,to)
+	rows, err := stmtIns.Query(vid, from, to)
 	if err != nil && err != sql.ErrNoRows {
 		return nil, err
 	}
 	if err != sql.ErrNoRows {
 		return nil, nil
 	}
-	stmtIns.Close()
+	defer stmtIns.Close()
 
-	for rows.
-	res := &defs.VideoInfo{Id: vid, AuthorId: aid, Name: name, DisplayCtime: dct}
+	for rows.Next() {
+		var id, name, content string
+		if err := rows.Scan(&id, &name, &content); err != nil {
+			break
+		}
+
+		c := &defs.Comment{Id: id, VideoId: vid, Author: name, Content: content}
+		res = append(res, c)
+	}
 	return res, nil
-}
 }
