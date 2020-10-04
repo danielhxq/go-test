@@ -5,6 +5,21 @@ import "log"
 //api->videoid->mysql
 //dispatcher->mysql->videoid->datachannel
 //executor->datachannel->videoid->delete videos
+func AddVideoDeletionRecord(video string) error {
+	stmtOut, err := dbConn.Prepare("insert into video_del_rec (video_id) values(?)")
+
+	if err != nil {
+		return err
+	}
+	_, err = stmtOut.Exec(video)
+
+	if err != nil {
+		log.Printf("Add VideoDeletionRecord err: %v", err)
+		return err
+	}
+	defer stmtOut.Close()
+	return nil
+}
 
 func ReadVideoDeletionRecord(count int) ([]string, error) {
 	stmtOut, err := dbConn.Prepare("select video_id from video_del_rec limit ?")

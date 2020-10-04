@@ -46,7 +46,6 @@ func (r *Runner) startDispatcher() {
 				return
 			}
 		default:
-
 		}
 	}
 }
