@@ -14,4 +14,5 @@ type Err struct {
 var (
 	ErrorRequestNotRecognized   = Err{Error: "api not recognized, bad request", ErrorCode: "001"}
 	ErrorRequestBodyParseFailed = Err{Error: "request is not correct, bad request", ErrorCode: "002"}
+	ErrorInternalFaults         = Err{Error: "internal service error", ErrorCode: "003"}
 )
