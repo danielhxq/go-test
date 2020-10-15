@@ -1,11 +1,16 @@
 package main
 
 import (
-	"github.com/Shopify/sarama"
+	_ "github.com/Shopify/sarama"
 	"github.com/astaxie/beego/config"
-	"github.com/garyburd/redigo/redis"
-	"github.com/hpcloud/tail"
+	_ "github.com/garyburd/redigo/redis"
+	_ "github.com/hpcloud/tail"
+	"log"
 )
 
 func main() {
+	_, err := config.NewConfig("yaml", "test.yml")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
